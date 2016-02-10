@@ -1,0 +1,39 @@
+﻿@model Uppgift1.Models.QuizViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Quiz</title>
+</head>
+<body>
+<div>
+    <h1>Vilken är din favorit?</h1>
+    @using (@Html.BeginForm())
+    {
+        <div>@Html.ValidationSummary()</div>
+        <dl>
+            <dt>Namn:</dt>
+            <dd>@Html.TextBoxFor(m => m.Namn)</dd>
+            <dt>Ålder:</dt>
+            <dd>@Html.TextBoxFor(m => m.Age)</dd>
+
+            <dt>Favoritgodis:</dt>
+            @foreach (var candy in Model.CandyList)
+            {
+                <dd><label>@Html.RadioButtonFor(m => m.FavoriteCandy, candy) @candy</label></dd>
+            }                     
+            <dt>Favoritårstid:</dt>
+            <dd>@Html.DropDownListFor(m => m.FavoriteSeason, new SelectList(Model.SeasonList),"(välj årstid)")</dd>
+            <dd><input type="submit" value="Skicka"/></dd>
+        </dl> 
+
+    }
+</div>
+</body>
+</html>
